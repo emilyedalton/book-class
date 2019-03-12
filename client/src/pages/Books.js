@@ -11,21 +11,37 @@ class Books extends Component {
   state = {
     books: [],
     title: "",
-    author: "",
-    synopsis: ""
+    
+    // search: ""
   };
 
   componentDidMount() {
     this.loadBooks();
   }
-
+//res.data.items was the magic thing to get the default term to work
   loadBooks = () => {
     API.getBooks()
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+        this.setState({ books: res.data.items, title: "", author: "", synopsis: ""})
       )
       .catch(err => console.log(err));
+
   };
+  search = query =>{
+  API.search(query).then(resp => this.setState( 
+    {books: resp.data.items,
+     title: "",
+    },
+    
+  ))};
+    // if(!resp.ok){
+    //   if(resp.status >=400 && resp.status < 500){
+    //     return resp.json().then(data =>{
+    //       let err ={errorMessage:data.message};
+    //       throw err; 
+    //     })
+    //   }
+    
 
   deleteBook = id => {
     API.deleteBook(id)
@@ -42,16 +58,19 @@ class Books extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.title && this.state.author) {
-      API.saveBook({
-        title: this.state.title,
-        author: this.state.author,
-        synopsis: this.state.synopsis
-      })
-        .then(res => this.loadBooks())
-        .catch(err => console.log(err));
-    }
-  };
+    // if (this.state.title) {
+      this.search(this.setState.title)        
+      .then(res => this.loadBooks())
+      ;
+  }
+
+        // title: this.state.title,
+        // author: this.state.author,
+        // synopsis: this.state.synopsis
+  //     })
+  //       .catch(err => console.log(err));
+  //   }
+  // };
 
   render() {
     return (
@@ -68,7 +87,7 @@ class Books extends Component {
                 name="title"
                 placeholder="Title (required)"
               />
-              <Input
+              {/* <Input
                 value={this.state.author}
                 onChange={this.handleInputChange}
                 name="author"
@@ -79,9 +98,9 @@ class Books extends Component {
                 onChange={this.handleInputChange}
                 name="synopsis"
                 placeholder="Synopsis (Optional)"
-              />
+              /> */}
               <FormBtn
-                disabled={!(this.state.author && this.state.title)}
+                // disabled={!(this.state.author && this.state.title)}
                 onClick={this.handleFormSubmit}
               >
                 Submit Book
@@ -98,7 +117,7 @@ class Books extends Component {
                   <ListItem key={book._id}>
                     <Link to={"/books/" + book._id}>
                       <strong>
-                        {book.title} by {book.author}
+                        {book.volumeInfo.title} by {book.volumeInfo.authors}
                       </strong>
                     </Link>
                     <DeleteBtn onClick={() => this.deleteBook(book._id)} />
