@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
+import BookPage from "../components/BookPage";
 
 class Books extends Component {
   state = {
@@ -107,31 +108,47 @@ class Books extends Component {
               </FormBtn>
             </form>
           </Col>
-          <Col size="md-6 sm-12">
+          <Col size="md-6 sm-12"/>
             <Jumbotron>
               <h1>Books On My List</h1>
             </Jumbotron>
             {this.state.books.length ? (
-              <List>
-                {this.state.books.map(book => (
+              <div>
+              {this.state.books.map(book =>(
+                <BookPage key={book._id}
+                title={book.volumeInfo.title}
+                author ={book.volumeInfo.authors}
+                image={book.volumeInfo.imageLinks.thumbnail}
+                description={book.volumeInfo.description}
+                />
+
+              ))}
+</div>
+               /* <List>
+               {this.state.books.map(book => (
                   <ListItem key={book._id}>
                     <Link to={"/books/" + book._id}>
                       <strong>
-                        {book.volumeInfo.title} by {book.volumeInfo.authors}
+                      {book.volumeInfo.image}  {book.volumeInfo.title} by {book.volumeInfo.authors}
                       </strong>
                     </Link>
                     <DeleteBtn onClick={() => this.deleteBook(book._id)} />
                   </ListItem>
                 ))}
-              </List>
-            ) : (
+              </List> */
+            ) 
+            
+            :(
               <h3>No Results to Display</h3>
             )}
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
-}
+            
+      
+            
 
+</Row>
+</Container>
+
+          )
+        }} 
 export default Books;
+        

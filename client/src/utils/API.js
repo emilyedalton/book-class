@@ -11,7 +11,7 @@ export default {
   },
   // Gets all books
   getBooks: function() {
-    return axios.get(URL );
+    return axios.get(URL);
   },
   // Gets the book with the given id
   getBook: function(id) {
