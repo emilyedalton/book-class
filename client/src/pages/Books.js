@@ -59,9 +59,13 @@ class Books extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    // if (this.state.title) {
-      this.search(this.setState.title)        
-      .then(res => this.loadBooks())
+    API.search(this.state.title)
+    .then(res =>
+      this.setState({ books: res.data.items, title: "", author: "", synopsis: ""})
+    )
+    .catch(err => console.log(err)); ;// if (this.state.title) {
+      // console.log(this.state.title)// this.search(this.setState.title)        
+      // .then(res.data => this.loadBooks())
       ;
   }
 
@@ -83,14 +87,14 @@ class Books extends Component {
             <Jumbotron>
               <h1>What Books Should I Read?</h1>
             </Jumbotron>
-            <div className ="row">
+            {/* <div className ="row"> */}
             
             <form>
               <Input
                 value={this.state.title}
                 onChange={this.handleInputChange}
                 name="title"
-                placeholder="Title (required)"
+                placeholder="Search the Northwestern University Press catalog"
               />
               {/* <Input
                 value={this.state.author}
@@ -113,13 +117,13 @@ class Books extends Component {
               </FormBtn>
               
             </form>
-            </div>
+            {/* </div> */}
             {/* </div> */}
           {/* </Col> */}
           
           <Col size="md-12"/>
             <Jumbotron>
-              <h1>Books On My List</h1>
+              <h1>Recent Publications in Philosophy</h1>
             </Jumbotron>
             {this.state.books.length ? (
               <div>

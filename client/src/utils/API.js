@@ -1,13 +1,13 @@
 import axios from "axios";
 const URL = "https://www.googleapis.com/books/v1/volumes?q=philosophy+inpublisher:Northwestern&orderBy=newest"
 
-// const URL = "https://www.googleapis.com/books/v1/volumes?q=";
-
 
 export default {
   //perform search
   search: function(query) {
-    return axios.get(URL + query);
+    // const queryURL = `https://www.googleapis.com/books/v1/volumes?q=${query}+inpublisher:Northwestern&orderBy=newest`
+
+    return axios.get("https://www.googleapis.com/books/v1/volumes?",{ params: { q: query } },"inpublisher:Northwestern&orderBy=newest");
   },
   // Gets all books
   getBooks: function() {
