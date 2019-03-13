@@ -1,10 +1,12 @@
 import React from "react";
+import "../Nav/style.css";
+
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav className="navbar">
       <a className="navbar-brand" href="/">
-        React Reading List
+        Northwestern Univeristy Press
       </a>
     </nav>
   );
