@@ -68,6 +68,19 @@ class Books extends Component {
       // .then(res.data => this.loadBooks())
       ;
   }
+  handleFormSave = event => {
+    event.preventDefault();
+    alert("SAVED");
+    API.saveBook(this.state.title)
+    .then(res =>
+      this.setState({ books: res.data.items, title: "", author: "", synopsis: ""})
+    )
+    .catch(err => console.log(err)); ;// if (this.state.title) {
+      // console.log(this.state.title)// this.search(this.setState.title)        
+      // .then(res.data => this.loadBooks())
+      ;
+  }
+
 
         // title: this.state.title,
         // author: this.state.author,
@@ -133,6 +146,8 @@ class Books extends Component {
                 author ={book.volumeInfo.authors}
                 image={book.volumeInfo.imageLinks.thumbnail}
                 description={book.volumeInfo.description}
+                link={book.volumeInfo.canonicalVolumeLink}
+                onClick={this.handleFormSave}
                 />
 
               ))}

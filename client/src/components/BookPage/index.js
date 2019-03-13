@@ -8,11 +8,12 @@ class BookPage extends Component {
       <div >
 
 {/* <li>{props.title}</li> */}
- <h1>{this.props.title}</h1>
+ <h1><a href={this.props.link}>{this.props.title}</a></h1>
  <h2>{this.props.author}</h2>
  
  <div id = "description"><img src ={this.props.image} alt="book_image"/><p>{this.props.description}</p></div>
- <button type="button" class="btn btn-dark">Add to My Course Adoptions</button>
+
+ <button {...props} type="button"class="btn btn-dark">Add to My Course Adoptions</button>
 
       </div>
     );
