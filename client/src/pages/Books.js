@@ -82,25 +82,15 @@ class Books extends Component {
   }
 
 
-        // title: this.state.title,
-        // author: this.state.author,
-        // synopsis: this.state.synopsis
-  //     })
-  //       .catch(err => console.log(err));
-  //   }
-  // };
+   
 
   render() {
     return (
       <div className = "container">
-      {/* <Container fluid> */}
-      {/* <div className ="row"> */}
-        {/* <Row> */}
-          {/* <Col size="col-sm-6 col-sm-offset-3"> */}
+    
             <Jumbotron>
               <h1>What Books Should I Read?</h1>
             </Jumbotron>
-            {/* <div className ="row"> */}
             
             <form>
               <Input
@@ -109,18 +99,7 @@ class Books extends Component {
                 name="title"
                 placeholder="Search the Northwestern University Press catalog"
               />
-              {/* <Input
-                value={this.state.author}
-                onChange={this.handleInputChange}
-                name="author"
-                placeholder="Author (required)"
-              />
-              <TextArea
-                value={this.state.synopsis}
-                onChange={this.handleInputChange}
-                name="synopsis"
-                placeholder="Synopsis (Optional)"
-              /> */}
+             
               
               <FormBtn
                 // disabled={!(this.state.author && this.state.title)}
@@ -130,9 +109,7 @@ class Books extends Component {
               </FormBtn>
               
             </form>
-            {/* </div> */}
-            {/* </div> */}
-          {/* </Col> */}
+         
           
           <Col size="md-12"/>
             <Jumbotron>
@@ -152,18 +129,7 @@ class Books extends Component {
 
               ))}
 </div>
-               /* <List>
-               {this.state.books.map(book => (
-                  <ListItem key={book._id}>
-                    <Link to={"/books/" + book._id}>
-                      <strong>
-                      {book.volumeInfo.image}  {book.volumeInfo.title} by {book.volumeInfo.authors}
-                      </strong>
-                    </Link>
-                    <DeleteBtn onClick={() => this.deleteBook(book._id)} />
-                  </ListItem>
-                ))}
-              </List> */
+          
             ) 
             
             :(
@@ -173,9 +139,6 @@ class Books extends Component {
       
             
 
-{/* </Row> */}
-
-{/* </Container> */}
 </div>
 
           )

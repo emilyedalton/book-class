@@ -13,7 +13,7 @@ class BookPage extends Component {
  
  <div id = "description"><img src ={this.props.image} alt="book_image"/><p>{this.props.description}</p></div>
 
- <button {...props} type="button"class="btn btn-dark">Add to My Course Adoptions</button>
+ <button onClick={this.props.onClick} type="button"class="btn btn-dark">Add to My Course Adoptions</button>
 
       </div>
     );
