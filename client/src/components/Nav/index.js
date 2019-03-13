@@ -8,6 +8,7 @@ function Nav() {
       <a className="navbar-brand" href="/">
         Northwestern Univeristy Press
       </a>
+      <a className="nav-item" href="/saved">My Course Adoptions</a>
     </nav>
   );
 }
