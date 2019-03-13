@@ -89,7 +89,7 @@ class Books extends Component {
       <div className = "container">
     
             <Jumbotron>
-              <h1>What Books Should I Read?</h1>
+              {/* <h1>What Books Should I Read?</h1> */}
             </Jumbotron>
             
             <form>
@@ -112,9 +112,9 @@ class Books extends Component {
          
           
           <Col size="md-12"/>
-            <Jumbotron>
+            {/* <Jumbotron>
               <h1>Recent Publications in Philosophy</h1>
-            </Jumbotron>
+            </Jumbotron> */}
             {this.state.books.length ? (
               <div>
               {this.state.books.map(book =>(

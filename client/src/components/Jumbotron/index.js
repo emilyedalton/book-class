@@ -3,7 +3,7 @@ import React from "react";
 function Jumbotron({ children }) {
   return (
     <div
-      style={{ height: 300, clear: "both", paddingTop: 120, textAlign: "center", backgroundImage: "url(" + "https://images.pexels.com/photos/34153/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350" + ")"}}
+      style={{ color: "white",height: 300, clear: "both", paddingTop: 120, textAlign: "center", backgroundImage: "url(" + "http://nupress.northwestern.edu/sites/default/files/styles/header_image/public/01_image_0.jpg?itok=69lz_Ur2" + ")"}}
       className="jumbotron"
     >
       {children}
