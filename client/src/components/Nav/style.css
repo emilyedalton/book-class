@@ -7,4 +7,9 @@ nav { background-color:#4E2A84; }
 
 }
 
- a:hover{ color:  gainsboro};
+ a:hover{ 
+     
+          color:  #716C6B;
+          opacity:1;
+        text-decoration: none;
+};
