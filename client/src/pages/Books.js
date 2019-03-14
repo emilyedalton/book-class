@@ -11,18 +11,19 @@ import BookPage from "../components/BookPage";
 class Books extends Component {
   state = {
     books: [],
+    searchtitle:'',
     title: '',
     author: '',
     description: '',
     image: '',
     link: '',
-    selectedBookid: true
+    selectedBookid: ''
     // search: ""
   };
 
-  componentDidMount() {
-    this.loadBooks();
-  }
+  // componentDidMount() {
+  //   this.loadBooks();
+  // }
 //res.data.items was the magic thing to get the default term to work
   loadBooks = () => {
     API.getBooks()
@@ -35,7 +36,7 @@ class Books extends Component {
   search = query =>{
   API.search(query).then(res => this.setState( 
     {books: res.data.items,
-     title: "",
+     searchtitle: "",
     },
     
   ))};
@@ -72,11 +73,11 @@ class Books extends Component {
       // .then(res.data => this.loadBooks())
       ;
   }
-  bookSelectedHandler = (id) =>{
-    this.setState({selectedBookid:id})
-    alert("I'm SAVED"+ id)
+  // bookSelectedHandler = (id) =>{
+  //   this.setState({selectedBookid:id})
+  //   alert("I'm SAVED"+ id)
 
-  }
+  // }
 
 //   postDataHandler = (event) =>{
 //     this.setState({selectedBookid:true})
@@ -97,6 +98,7 @@ class Books extends Component {
 
 
   handleFormSave = bookData => {
+    console.log(bookData, "i am book data")
     // event.preventDefault();
     // alert("SAVED");
     API.saveBook(bookData)
@@ -150,12 +152,15 @@ class Books extends Component {
                 image={book.volumeInfo.imageLinks.thumbnail}
                 description={book.volumeInfo.description}
                 link={book.volumeInfo.canonicalVolumeLink}
-                onClick={this.handleFormSave(
-                  {title: book.volumeInfo.title,
+                clickedBook={this.handleFormSave(
+                  {
+                  title: book.volumeInfo.title,
                   author: book.volumeInfo.authors,
                   description: book.volumeInfo.description,
                   image: book.volumeInfo.imageLinks.thumbnail,
-                  link: book.volumeInfo.canonicalVolumeLink})}
+                  link: book.volumeInfo.canonicalVolumeLink,
+                  savedBooks: "true"
+                })}
                 />
 
               ))}
