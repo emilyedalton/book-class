@@ -11,8 +11,12 @@ import BookPage from "../components/BookPage";
 class Books extends Component {
   state = {
     books: [],
-    title: "",
-    
+    title: '',
+    author: '',
+    description: '',
+    image: '',
+    link: '',
+    selectedBookid: true
     // search: ""
   };
 
@@ -23,14 +27,14 @@ class Books extends Component {
   loadBooks = () => {
     API.getBooks()
       .then(res =>
-        this.setState({ books: res.data.items, title: "", author: "", synopsis: ""})
+        this.setState({ books: res.data.items})
       )
       .catch(err => console.log(err));
 
   };
   search = query =>{
-  API.search(query).then(resp => this.setState( 
-    {books: resp.data.items,
+  API.search(query).then(res => this.setState( 
+    {books: res.data.items,
      title: "",
     },
     
@@ -61,21 +65,43 @@ class Books extends Component {
     event.preventDefault();
     API.search(this.state.title)
     .then(res =>
-      this.setState({ books: res.data.items, title: "", author: "", synopsis: ""})
+      this.setState({ books: res.data.items})
     )
     .catch(err => console.log(err)); ;// if (this.state.title) {
       // console.log(this.state.title)// this.search(this.setState.title)        
       // .then(res.data => this.loadBooks())
       ;
   }
-  handleFormSave = event => {
-    event.preventDefault();
-    alert("SAVED");
-    API.saveBook(this.state.title)
-    .then(res =>
-      this.setState({ books: res.data.items, title: "", author: "", synopsis: ""})
-    )
-    .catch(err => console.log(err)); ;// if (this.state.title) {
+  bookSelectedHandler = (id) =>{
+    this.setState({selectedBookid:id})
+    alert("I'm SAVED"+ id)
+
+  }
+
+//   postDataHandler = (event) =>{
+//     this.setState({selectedBookid:true})
+
+//     const bookData ={
+//       // books: this.setState.books
+//  title: books.volumeInfo.title,
+//  author: book.volumeInfo.authors,
+//  description: book.volumeInfo.description,
+//  image: book.volumeInfo.imageLinks.thumbnail,
+//  link: book.volumeInfo.canonicalVolumeLink
+//     }
+//     event.preventDefault();
+// API.saveBook(bookData)
+// .then(response => {console.log(response);
+// })
+//   }
+
+
+  handleFormSave = bookData => {
+    // event.preventDefault();
+    // alert("SAVED");
+    API.saveBook(bookData)
+    // .then(alert("SAVED") )
+    .catch(err => console.log(err)) ;// if (this.state.title) {
       // console.log(this.state.title)// this.search(this.setState.title)        
       // .then(res.data => this.loadBooks())
       ;
@@ -118,13 +144,18 @@ class Books extends Component {
             {this.state.books.length ? (
               <div>
               {this.state.books.map(book =>(
-                <BookPage key={book._id}
+                <BookPage key={book.id}
                 title={book.volumeInfo.title}
                 author ={book.volumeInfo.authors}
                 image={book.volumeInfo.imageLinks.thumbnail}
                 description={book.volumeInfo.description}
                 link={book.volumeInfo.canonicalVolumeLink}
-                onClick={this.handleFormSave}
+                onClick={this.handleFormSave(
+                  {title: book.volumeInfo.title,
+                  author: book.volumeInfo.authors,
+                  description: book.volumeInfo.description,
+                  image: book.volumeInfo.imageLinks.thumbnail,
+                  link: book.volumeInfo.canonicalVolumeLink})}
                 />
 
               ))}
