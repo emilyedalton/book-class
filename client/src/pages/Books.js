@@ -7,11 +7,10 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
 import BookPage from "../components/BookPage";
-
+//shoudl be the collection fieldnames, so when you call the model it will update the
 class Books extends Component {
   state = {
     books: [],
-    searchtitle:'',
     title: '',
     author: '',
     description: '',
@@ -21,9 +20,9 @@ class Books extends Component {
     // search: ""
   };
 
-  // componentDidMount() {
-  //   this.loadBooks();
-  // }
+  componentDidMount() {
+    this.loadBooks();
+  }
 //res.data.items was the magic thing to get the default term to work
   loadBooks = () => {
     API.getBooks()
@@ -36,7 +35,7 @@ class Books extends Component {
   search = query =>{
   API.search(query).then(res => this.setState( 
     {books: res.data.items,
-     searchtitle: "",
+     title: "",
     },
     
   ))};
@@ -73,11 +72,11 @@ class Books extends Component {
       // .then(res.data => this.loadBooks())
       ;
   }
-  // bookSelectedHandler = (id) =>{
-  //   this.setState({selectedBookid:id})
-  //   alert("I'm SAVED"+ id)
+  bookSelectedHandler = (id) =>{
+    this.setState({selectedBookid:id})
+    alert("I'm SAVED"+ id)
 
-  // }
+  }
 
 //   postDataHandler = (event) =>{
 //     this.setState({selectedBookid:true})
@@ -98,12 +97,20 @@ class Books extends Component {
 
 
   handleFormSave = bookData => {
+    // event.preventDefault();
+    if (this.state.title && this.state.author)
+
     console.log(bookData, "i am book data")
     // event.preventDefault();
     // alert("SAVED");
     API.saveBook(bookData)
+
+    
     // .then(alert("SAVED") )
-    .catch(err => console.log(err)) ;// if (this.state.title) {
+    // .catch(err => console.log(err)) ;
+    
+    
+    // if (this.state.title) {
       // console.log(this.state.title)// this.search(this.setState.title)        
       // .then(res.data => this.loadBooks())
       ;
@@ -121,7 +128,7 @@ class Books extends Component {
             </Jumbotron>
             
             <form>
-              <Input
+              <input
                 value={this.state.title}
                 onChange={this.handleInputChange}
                 name="title"
@@ -152,7 +159,7 @@ class Books extends Component {
                 image={book.volumeInfo.imageLinks.thumbnail}
                 description={book.volumeInfo.description}
                 link={book.volumeInfo.canonicalVolumeLink}
-                clickedBook={this.handleFormSave(
+                clickHandler= {()=> {this.handleFormSave(
                   {
                   title: book.volumeInfo.title,
                   author: book.volumeInfo.authors,
@@ -160,7 +167,7 @@ class Books extends Component {
                   image: book.volumeInfo.imageLinks.thumbnail,
                   link: book.volumeInfo.canonicalVolumeLink,
                   savedBooks: "true"
-                })}
+                })}}
                 />
 
               ))}

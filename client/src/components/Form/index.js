@@ -20,7 +20,7 @@ export function TextArea(props) {
 
 export function FormBtn(props) {
   return (
-    <button onClick={props.onClick} name ={props.searchtitle} style={{ float: "right", marginBottom: 10 }} className="btn btn-dark">
+    <button onClick={props.clickHandler} name ={props.searchtitle} style={{ float: "right", marginBottom: 10 }} className="btn btn-dark">
       {props.children}
     </button>
   );

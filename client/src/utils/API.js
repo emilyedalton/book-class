@@ -26,11 +26,12 @@ export default {
     return axios.delete("/api/books/" + id);
   },
 
-  updateBook: function(id) {
-    return axios.update("/api/books/" + id);
+  update: function(id) {
+    return axios.delete("/api/books/" + id);
   },
   // Saves a book to the database
   saveBook: function(bookData) {
-    return axios.post("/api/books", bookData);
+    console.log(bookData)
+    // return axios.post("/api/books", bookData);
   }
 };
