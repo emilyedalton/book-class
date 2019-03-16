@@ -1,4 +1,5 @@
 import React from "react";
+import "../Form/style.css"
 
 // This file exports the Input, TextArea, and FormBtn components
 const Form = props => {
@@ -14,7 +15,7 @@ const Form = props => {
     //  id ="search"
      placeholder="Search the Northwestern University Press Catalog">
     </input>
-    <button type="submit" onClick={props.submit} className="btn btn-danger">Submit</button>
+    <button type="submit" onClick={props.submit} className="btn btn-dark">Submit</button>
     </div>
 </form>
 
