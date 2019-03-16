@@ -6,6 +6,9 @@ router.route("/")
 // "this route is working"
   .get(booksController.findAll)
   // .post(booksController.create);
+  router.route("/saved")
+  .get(booksController.findAll)
+
   router.route("/google")
     .get(booksController.create)
 // Matches with "/api/books/:id"

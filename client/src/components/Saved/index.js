@@ -1,7 +1,6 @@
 import React, { Component } from 'react'; 
-import "../BookPage/style.css"
 
-class BookPage extends Component {
+class Saved extends Component {
   render(props) {
     return (
       <div >
@@ -22,4 +21,4 @@ class BookPage extends Component {
   }
 }
 
-export default BookPage;
+export default Saved;

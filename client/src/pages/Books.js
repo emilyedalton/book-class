@@ -12,12 +12,6 @@ import BookPage from "../components/BookPage";
 class Books extends Component {
   state = {
     books: [],
-    // title: '',
-    // author: '',
-    // description: '',
-    // image: '',
-    // link: '',
-    // selectedBookid: '',
     searchTerm: ""
   };
 
@@ -54,20 +48,9 @@ class Books extends Component {
   };
 
   handleInputChange = event => {
-    // Emily, this event is part on the onchangeinput that get the name and value on input tag
-    // you must specific exactly name as "name" and value as "value"
-    //otherwise you string concatenation for the searchterm won't work
-
-
     const value = event.target.value;    
-     //Emily, value attribute from the Form componet get the {this.state.searchTerm}
     const name = event.target.name;
-    //Emily, name attriubute from the Form component get the name attribute called searchTerm
-    //It has to be this name searchTerm because you needed to update the state object that has searchTerm property
-    // that searchTerm has to be the same as the state property
-    
-    // { name, value } = event.target;
-    this.setState({
+      this.setState({
       [name]: value
     });
   };
@@ -166,7 +149,6 @@ and value as "value" otherwise it will break */}
         {this.state.books.length ? (
           <div>
             {this.state.books.map(book => (
-// Emily, since the thumbnail and authors can be n/A, we need a trinary operator to check to see if it exists
 
               <BookPage
               key={book.id}
