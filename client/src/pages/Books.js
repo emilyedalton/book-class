@@ -6,47 +6,46 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
+import Form from '../components/Form'
 import BookPage from "../components/BookPage";
 //shoudl be the collection fieldnames, so when you call the model it will update the
 class Books extends Component {
   state = {
     books: [],
-    title: '',
-    author: '',
-    description: '',
-    image: '',
-    link: '',
-    selectedBookid: ''
-    // search: ""
+    // title: '',
+    // author: '',
+    // description: '',
+    // image: '',
+    // link: '',
+    // selectedBookid: '',
+    searchTerm: ""
   };
 
-  componentDidMount() {
-    this.loadBooks();
-  }
-//res.data.items was the magic thing to get the default term to work
-  loadBooks = () => {
-    API.getBooks()
-      .then(res =>
-        this.setState({ books: res.data.items})
-      )
-      .catch(err => console.log(err));
+  // componentDidMount() {
+  //   this.loadBooks();
+  // }
+  //res.data.items was the magic thing to get the default term to work
+  // loadBooks = () => {
+  //   API.getBooks()
+  //     .then(res =>
+  //       this.setState({ books: res.data.items})
+  //     )
+  //     .catch(err => console.log(err));
+
+  // };
+  search = query => {
+  
+
 
   };
-  search = query =>{
-  API.search(query).then(res => this.setState( 
-    {books: res.data.items,
-     title: "",
-    },
-    
-  ))};
-    // if(!resp.ok){
-    //   if(resp.status >=400 && resp.status < 500){
-    //     return resp.json().then(data =>{
-    //       let err ={errorMessage:data.message};
-    //       throw err; 
-    //     })
-    //   }
-    
+  // if(!resp.ok){
+  //   if(resp.status >=400 && resp.status < 500){
+  //     return resp.json().then(data =>{
+  //       let err ={errorMessage:data.message};
+  //       throw err; 
+  //     })
+  //   }
+
 
   deleteBook = id => {
     API.deleteBook(id)
@@ -55,7 +54,19 @@ class Books extends Component {
   };
 
   handleInputChange = event => {
-    const { name, value } = event.target;
+    // Emily, this event is part on the onchangeinput that get the name and value on input tag
+    // you must specific exactly name as "name" and value as "value"
+    //otherwise you string concatenation for the searchterm won't work
+
+
+    const value = event.target.value;    
+     //Emily, value attribute from the Form componet get the {this.state.searchTerm}
+    const name = event.target.name;
+    //Emily, name attriubute from the Form component get the name attribute called searchTerm
+    //It has to be this name searchTerm because you needed to update the state object that has searchTerm property
+    // that searchTerm has to be the same as the state property
+    
+    // { name, value } = event.target;
     this.setState({
       [name]: value
     });
@@ -63,128 +74,136 @@ class Books extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    API.search(this.state.title)
-    .then(res =>
-      this.setState({ books: res.data.items})
-    )
-    .catch(err => console.log(err)); ;// if (this.state.title) {
+    API.search(this.state.searchTerm)
+    .then(res => this.setState({ books: res.data }))
+    .catch(err => console.log(err));
+    console.log(this.state.searchTerm)
+      // .then(res =>
+      //   this.setState({ books: res.data.items})
+      // )
+      // if (this.state.title) {
       // console.log(this.state.title)// this.search(this.setState.title)        
       // .then(res.data => this.loadBooks())
       ;
   }
-  bookSelectedHandler = (id) =>{
-    this.setState({selectedBookid:id})
-    alert("I'm SAVED"+ id)
+  // bookSelectedHandler = (id) => {
+  //   this.setState({ selectedBookid: id })
+  //   alert("I'm SAVED" + id)
 
-  }
+  // }
 
-//   postDataHandler = (event) =>{
-//     this.setState({selectedBookid:true})
+  //   postDataHandler = (event) =>{
+  //     this.setState({selectedBookid:true})
 
-//     const bookData ={
-//       // books: this.setState.books
-//  title: books.volumeInfo.title,
-//  author: book.volumeInfo.authors,
-//  description: book.volumeInfo.description,
-//  image: book.volumeInfo.imageLinks.thumbnail,
-//  link: book.volumeInfo.canonicalVolumeLink
-//     }
-//     event.preventDefault();
-// API.saveBook(bookData)
-// .then(response => {console.log(response);
-// })
-//   }
+  //     const bookData ={
+  //       // books: this.setState.books
+  //  title: books.volumeInfo.title,
+  //  author: book.volumeInfo.authors,
+  //  description: book.volumeInfo.description,
+  //  image: book.volumeInfo.imageLinks.thumbnail,
+  //  link: book.volumeInfo.canonicalVolumeLink
+  //     }
+  //     event.preventDefault();
+  // API.saveBook(bookData)
+  // .then(response => {console.log(response);
+  // })
+  //   }
 
 
   handleFormSave = bookData => {
-    // event.preventDefault();
-    if (this.state.title && this.state.author)
-
     console.log(bookData, "i am book data")
-    // event.preventDefault();
-    // alert("SAVED");
     API.saveBook(bookData)
 
-    
-    // .then(alert("SAVED") )
-    // .catch(err => console.log(err)) ;
-    
-    
-    // if (this.state.title) {
+
+      // .then(alert("SAVED") )
+      // .catch(err => console.log(err)) ;
+
+
+      // if (this.state.title) {
       // console.log(this.state.title)// this.search(this.setState.title)        
       // .then(res.data => this.loadBooks())
       ;
   }
 
 
-   
+
 
   render() {
     return (
-      <div className = "container">
-    
-            <Jumbotron>
-              {/* <h1>What Books Should I Read?</h1> */}
-            </Jumbotron>
-            
-            <form>
-              <input
-                value={this.state.title}
-                onChange={this.handleInputChange}
-                name="title"
-                placeholder="Search the Northwestern University Press catalog"
-              />
-             
-              
-              <FormBtn
+      <div className="container">
+
+        <Jumbotron>
+          {/* <h1>What Books Should I Read?</h1> */}
+        </Jumbotron>
+
+{/* Emily, remember the attributes are the ones that you are calling using the dot props
+, you didn't have the right name for the attribute name and value. Also name and value
+are referencing in the inputOnchange event. You need to have the attribute name as "name" and
+and value as "value" otherwise it will break */}
+
+        <Form
+            name="searchTerm"
+          value={this.state.searchTerm}
+          onChange={this.handleInputChange}
+          submit={this.handleFormSubmit}
+
+        />
+
+
+        {/* <FormBtn
                 // disabled={!(this.state.author && this.state.title)}
                 onClick={this.handleFormSubmit}
               >
                 Submit Book
-              </FormBtn>
-              
-            </form>
-         
-          
-          <Col size="md-12"/>
-            {/* <Jumbotron>
+              </FormBtn> */}
+
+
+
+        <Col size="md-12" />
+        {/* <Jumbotron>
               <h1>Recent Publications in Philosophy</h1>
             </Jumbotron> */}
-            {this.state.books.length ? (
-              <div>
-              {this.state.books.map(book =>(
-                <BookPage key={book.id}
-                title={book.volumeInfo.title}
-                author ={book.volumeInfo.authors}
-                image={book.volumeInfo.imageLinks.thumbnail}
-                description={book.volumeInfo.description}
-                link={book.volumeInfo.canonicalVolumeLink}
-                clickHandler= {()=> {this.handleFormSave(
-                  {
-                  title: book.volumeInfo.title,
-                  author: book.volumeInfo.authors,
-                  description: book.volumeInfo.description,
-                  image: book.volumeInfo.imageLinks.thumbnail,
-                  link: book.volumeInfo.canonicalVolumeLink,
-                  savedBooks: "true"
-                })}}
-                />
+        {this.state.books.length ? (
+          <div>
+            {this.state.books.map(book => (
+// Emily, since the thumbnail and authors can be n/A, we need a trinary operator to check to see if it exists
 
-              ))}
-</div>
-          
-            ) 
-            
-            :(
-              <h3>No Results to Display</h3>
-            )}
-            
-      
-            
+              <BookPage
+              key={book.id}
+              title={book.volumeInfo.title}
+              subtitle={book.volumeInfo.subtitle}
+              link={book.volumeInfo.infoLink}
+              authors={book.volumeInfo.authors?book.volumeInfo.authors.join(", "):""}
+              description={book.volumeInfo.description}
+              image={book.volumeInfo.imageLinks ?book.volumeInfo.imageLinks.thumbnail:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png"}
+                clickHandler={() => {
+                  this.handleFormSave(
+                    {
+                      title: book.volumeInfo.title,
+                      author: book.volumeInfo.authors,
+                      description: book.volumeInfo.description,
+                      image: book.volumeInfo.imageLinks.thumbnail ,
+                      link: book.volumeInfo.canonicalVolumeLink,
+                      savedBooks: "true"
+                    })
+                }}
+              />
 
-</div>
+            ))}
+          </div>
 
-          )
-        }} 
+        )
+
+          : (
+            <h3>No Results to Display</h3>
+          )}
+
+
+
+
+      </div>
+
+    )
+  }
+}
 export default Books;
-        

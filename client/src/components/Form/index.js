@@ -1,27 +1,32 @@
 import React from "react";
 
 // This file exports the Input, TextArea, and FormBtn components
+const Form = props => {
 
-export function Input(props) {
   return (
-    <div className="form-group">
-      <input className="form-control" name ={props.searchtitle} />
+<form>
+  <div className="form-group">
+    <input type="text"
+    name={props.name}
+     value ={props.value}
+     className="form-control" 
+     onChange={props.onChange}
+    //  id ="search"
+     placeholder="Search the Northwestern University Press Catalog">
+    </input>
+    <button type="submit" onClick={props.submit} className="btn btn-danger">Submit</button>
     </div>
-  );
-}
+</form>
 
-export function TextArea(props) {
-  return (
-    <div className="form-group">
-      <textarea className="form-control" rows="20" {...props} />
-    </div>
-  );
-}
 
-export function FormBtn(props) {
-  return (
-    <button onClick={props.clickHandler} name ={props.searchtitle} style={{ float: "right", marginBottom: 10 }} className="btn btn-dark">
-      {props.children}
-    </button>
+
+
+
   );
+
+
+
+
 }
+export default Form;
+
