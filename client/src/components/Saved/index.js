@@ -1,7 +1,9 @@
 import React, { Component } from 'react'; 
+import "../Saved/style.css"
+
 
 class Saved extends Component {
-  render(props) {
+  render() {
     return (
       <div >
 
@@ -11,7 +13,7 @@ class Saved extends Component {
  <div id = "description">
  
  <img src ={this.props.image} alt="book_image"/><p>{this.props.description}</p>
- <button onClick ={this.props.clickHandler} type="button"class="btn btn-dark">Add to My Course Adoptions</button>
+ <button booknum={this.props.booknum} onClick ={this.props.clickHandler} type="button"className="btn btn-dark">Remove From Course Adoptions</button>
 
  </div>
 <div>

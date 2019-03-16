@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
-import { Input, TextArea, FormBtn } from "../components/Form";
-import Form from '../components/Form'
+import { Col} from "../components/Grid";
 import Saved from "../components/Saved";
+
 
 class SavedTitle extends Component {
   state={
@@ -28,6 +24,12 @@ class SavedTitle extends Component {
         ))
       .catch(err => console.log(err));
       }
+      deleteBook = event => {
+       const bookid= event.target.attributes.getNamedItem("booknum").value;
+        API.deleteBook(bookid)
+          .then(res => this.loadBooks())
+          .catch(err => console.log(err));
+      };
       
   render() {
     return (
@@ -45,15 +47,14 @@ class SavedTitle extends Component {
             {this.state.books.map(book => (
 
               <Saved
-              key={book._id}
+              booknum={book._id}
               title={book.title}
               subtitle={book.subtitle}
               link={book.link}
               authors={book.authors}
-              // authors={book.authors.join(", ")}
-
               description={book.description}
               image={book.image}
+              clickHandler={this.deleteBook}
           
               />
 
