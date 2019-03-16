@@ -21,10 +21,11 @@ class SavedTitle extends Component {
 
 //   res.data.items was the magic thing to get the default term to work
   loadBooks = () => {
-    API.getBooks()
+    API.getAPIBooks()
       .then(res =>
-        this.setState({ books: res.data}))
-      
+        this.setState({ books: res.data},
+          console.log("I am logging " + res.data)
+        ))
       .catch(err => console.log(err));
       }
       
@@ -48,7 +49,9 @@ class SavedTitle extends Component {
               title={book.title}
               subtitle={book.subtitle}
               link={book.link}
-              authors={book.authors.join(", ")}
+              authors={book.authors}
+              // authors={book.authors.join(", ")}
+
               description={book.description}
               image={book.image}
           
