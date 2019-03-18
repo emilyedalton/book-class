@@ -14,8 +14,9 @@ const Form = props => {
      onChange={props.onChange}
     //  id ="search"
      placeholder="Search the Northwestern University Press Catalog">
-    </input>
-    <button type="submit" onClick={props.submit} className="btn btn-dark">Submit</button>
+    </input>  <button type="submit" onClick={props.submit} className="btn btn-dark">Submit</button>
+
+    
     </div>
 </form>
 

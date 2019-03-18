@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import { Col} from "../components/Grid";
+import {Col} from "../components/Grid";
 import Saved from "../components/Saved";
 
 
@@ -59,6 +59,8 @@ class SavedTitle extends Component {
               />
 
             ))}
+                    <Col size="md-12" />
+
           </div>
 
         )

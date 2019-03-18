@@ -4,7 +4,8 @@ import "../BookPage/style.css"
 class BookPage extends Component {
   render(props) {
     return (
-      <div >
+      <div className = "container">
+      <div className ="card" >
 
  
  <h1><a href={this.props.link}>{this.props.title}</a></h1>
@@ -15,8 +16,8 @@ class BookPage extends Component {
  <button onClick ={this.props.clickHandler} type="button"className="btn btn-dark">Add to My Course Adoptions</button>
 
  </div>
-<div>
- </div>
+
+      </div>
       </div>
     );
   }

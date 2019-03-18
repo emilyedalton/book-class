@@ -3,6 +3,8 @@ import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import Form from '../components/Form'
 import BookPage from "../components/BookPage";
+import {Col} from "../components/Grid";
+
 //shoudl be the collection fieldnames, so when you call the model it will update the
 class Books extends Component {
   state = {
@@ -62,7 +64,7 @@ class Books extends Component {
 
 
         <Form
-            name="searchTerm"
+          name="searchTerm"
           value={this.state.searchTerm}
           onChange={this.handleInputChange}
           submit={this.handleFormSubmit}
@@ -97,6 +99,8 @@ class Books extends Component {
               />
 
             ))}
+                    <Col size="md-12" />
+
           </div>
 
         )
