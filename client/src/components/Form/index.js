@@ -6,7 +6,8 @@ const Form = props => {
 
   return (
 <form>
-  <div className="form-group">
+<div className="form-row">
+  <div className="form-group col-md-11">
     <input type="text"
     name={props.name}
      value ={props.value}
@@ -14,9 +15,13 @@ const Form = props => {
      onChange={props.onChange}
     //  id ="search"
      placeholder="Search the Northwestern University Press Catalog">
-    </input>  <button type="submit" onClick={props.submit} className="btn btn-dark">Submit</button>
+     </input> 
+     </div>
+       <div className="form-group col-md-1">
 
-    
+     <button type="submit" onClick={props.submit} className="btn btn-dark">Submit</button>
+</div>
+   
     </div>
 </form>
 
