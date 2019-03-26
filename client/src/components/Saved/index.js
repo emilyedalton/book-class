@@ -5,7 +5,8 @@ import "../Saved/style.css"
 class Saved extends Component {
   render() {
     return (
-      <div >
+      <div className = "container">
+      <div className ="card" >
 
  
  <h1><a href={this.props.link}>{this.props.title}</a></h1>
@@ -17,6 +18,7 @@ class Saved extends Component {
 
  </div>
 <div>
+ </div>
  </div>
       </div>
     );
